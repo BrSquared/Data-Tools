@@ -1,0 +1,27 @@
+---
+title: "Interactive Leaflet Map"
+author: "Brendan Brogan"
+date: "2023-03-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Some Sand Mines in Southern NJ
+March 9th, 2022
+
+
+```{r cars}
+library(leaflet)
+df <- data.frame(lat = c(39.328118,39.292788, 39.310323, 39.281362), 
+                 lng = c( -74.957682,-75.029093,-75.114237,-75.005060))
+pops <- c("Whibco","Unimin","Heidleberg","Hanson")
+
+map1 <- leaflet(df) %>% 
+  addTiles() %>% 
+  addMarkers(popup = pops)
+
+map1
+```
