@@ -1,0 +1,58 @@
+---
+title: "My Shiny App"
+author: "Brendan Brogan"
+date: "2023-04-05"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Basic Idea
+
+The purpose of this application was simple. The user selects the imperial unit of length on the left, enters the amount, and selects the metric unit on the right. It will then display the correct conversion.
+
+## Purpose
+
+- Converting between imperial and metric units is a common pain in the US, and anyone working with US clients 
+- Calculations are normally fast and simple, but this provides a tool to do them without any thought
+- Similar tools exist, but it still saves a google. Helpful if you dont have internet access
+
+```{r Inputs, echo = TRUE}
+inp <- "Feet"
+out <- "Kilometers"
+```
+
+## Calculations
+
+The app uses two if trees to determine which constants to use. One for the imperial unit, converting to meters and one for the metric unit to apply the prefix. Below shows the format of the server end calculation.
+
+```{r iftrees, echo = TRUE}
+mult1 <- if (inp == "Inches") {
+  0.0254
+} else if (inp == "Feet") {
+  0.3048
+} else if (inp == "Yards") {
+  0.9144
+}
+mult2 <- if (out == "Centimeters") {
+  100
+} else if (out == "Meters") {
+  1
+} else if (out == "Kilometers") {
+  0.001
+}
+```
+
+
+## Summary
+
+The final step is to multiply the 2 constants. This is then multiplied by whatever is input to provide the answer.
+
+```{r output, echo = TRUE}
+ans <- mult1 * mult2
+ans
+```
+
+It is a simple app, as unit conversions are a simple process. But it is important to many lines of work and has lead to countless errors when done by hand. This is a barebnes app to show how a more comprehensive one could be built with shiny.
